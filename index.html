@@ -18,26 +18,30 @@
         }
 
         /* Efekt spadającego śniegu w CSS */
+       /* Zaktualizowany, nieskończony śnieg z efektem głębi */
         .snow-bg {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
-                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.4) 1.5px, transparent 1.5px),
-                radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.2) 2px, transparent 2px),
-                radial-gradient(circle at 20% 90%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
-                radial-gradient(circle at 70% 10%, rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px);
-            background-size: 80px 80px;
-            animation: snowFall 20s linear infinite;
+                radial-gradient(circle, rgba(255, 255, 255, 0.6) 2px, transparent 2px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px);
+            background-size: 100px 100px, 60px 60px, 40px 40px; /* Trzy różne warstwy */
+            animation: snowFall 15s linear infinite;
             z-index: -1; 
         }
 
         @keyframes snowFall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50%); }
+            0% { 
+                background-position: 0px 0px, 0px 0px, 0px 0px; 
+            }
+            100% { 
+                /* Przesuwamy każdą warstwę o wielokrotność jej rozmiaru - to gwarantuje idealną pętlę */
+                background-position: 100px 1000px, 60px 600px, -40px 400px; 
+            }
         }
 
         .profile-card {
