@@ -3,72 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flajp | Bio</title>
+    <title>flajp | Portfolio & Services</title>
     <style>
-        body {
+        /* --- RESET & GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
             background-color: #050505;
             color: #ffffff;
             font-family: 'Arial', sans-serif;
+        }
+
+        /* Subtelny pasek przewijania */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ffffff;
+            border-radius: 4px;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes loadingStripes {
+            from { background-position: 0 0; }
+            to { background-position: 40px 0; }
+        }
+
+        /* --- LAYOUT SECTIONS --- */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* --- HERO SECTION (START) --- */
+        #hero {
+            justify-content: center;
+        }
+
+        .avatar-large {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            margin-bottom: 25px;
+            object-fit: cover;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        h1.hero-title {
+            font-size: 3.5rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #aaaaaa;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #888888;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-hint:hover {
+            color: #ffffff;
+        }
+
+        .scroll-hint span {
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+
+        /* --- SERVICES SECTION --- */
+        #services {
+            background-color: #090909;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background-color: #ffffff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background-color: #0c0c0c;
+            border: 2px solid #222222;
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: #ffffff;
+            transform: translateY(-5px);
+            box-shadow: 6px 6px 0px #ffffff;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        .service-card p {
+            color: #aaaaaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- PORTFOLIO BANNER --- */
+        .portfolio-box {
+            background: #050505;
+            border: 2px dashed #333333;
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .portfolio-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .btn-soon {
+            display: inline-block;
+            padding: 14px 35px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            background: linear-gradient(45deg, #111 25%, #22 25%, #22 50%, #11 50%, #11 75%, #22 75%, #22 100%);
+            background-size: 40px 40px;
+            border: 2px solid #ffffff;
+            border-radius: 6px;
+            cursor: not-allowed;
+            animation: loadingStripes 2s linear infinite;
+            box-shadow: 4px 4px 0px #ffffff;
+        }
+
+        /* --- CONTACT SECTION --- */
+        #contact {
+            background-color: #050505;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .contact-btn {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Zabezpiecza przed pojawieniem się paska przewijania od śniegu */
+            text-decoration: none;
+            color: #000000;
+            background-color: #ffffff;
+            padding: 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            border: 2px solid transparent;
+            box-shadow: 6px 6px 0px #333333;
         }
 
-        /* Efekt spadającego śniegu w CSS */
-       /* Zaktualizowany, nieskończony śnieg z efektem głębi */
-        .snow-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle, rgba(255, 255, 255, 0.6) 2px, transparent 2px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
-                radial-gradient(circle, rgba(255, 255, 255, 0.2) 1.5px, transparent 1.5px);
-            background-size: 100px 100px, 60px 60px, 40px 40px; /* Trzy różne warstwy */
-            animation: snowFall 15s linear infinite;
-            z-index: -1; 
-        }
-
-        @keyframes snowFall {
-            0% { 
-                background-position: 0px 0px, 0px 0px, 0px 0px; 
-            }
-            100% { 
-                /* Przesuwamy każdą warstwę o wielokrotność jej rozmiaru - to gwarantuje idealną pętlę */
-                background-position: 100px 1000px, 60px 600px, -40px 400px; 
-            }
-        }
-
-        .profile-card {
-            text-align: center;
+        .contact-btn:hover {
+            background-color: #050505;
+            color: #ffffff;
             border: 2px solid #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            width: 300px;
-            background-color: #050505; /* Tło pod kartą, żeby śnieg znikał z tyłu */
-            box-shadow: 8px 8px 0px #ffffff;
-            z-index: 1;
+            box-shadow: 6px 6px 0px #ffffff;
+            transform: translate(-2px, -2px);
         }
 
-        .avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 2px solid #ffffff;
-            margin-bottom: 15px;
-            background-color: #222;
-            object-fit: cover;
+        /* Responsive design adjustments */
+        @media (max-width: 600px) {
+            h1.hero-title { font-size: 2.3rem; }
+            .section-title { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
         }
+    </style>
+</head>
+<body>
 
-        h1 { 
-            margin: 0; 
-            font-size: 24px;
-            letter-spacing: 2px;
+    <!-- SEKCDJA 1: HERO (START) -->
+    <section id="hero">
+        <div class="container">
+            <img src="https://i.postimg.cc/ncpKt4gP/file-00000000da88720a98c78e4a3f1647e8.png" alt="Logo flajp" class="avatar-large">
+            <h1 class="hero-title">flajp</h1>
+            <p class="hero-subtitle">JS Developer & Graphic Designer</p>
+        </div>
+        <a href="#services" class="scroll-hint">
+            DOWIEDZ SIĘ WIĘCEJ
+            <span>↓</span>
+        </a>
+    </section>
+
+    <!-- SEKCJA 2: ASORTYMENT / USŁUGI -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Oferta i Usługi</h2>
+            
+            <div class="services-grid">
+                <!-- Karta 1: Boty DC -->
+                <div class="service-card">
+                    <h3>Automatyzacja Discord</h3>
+                    <p>Projektowanie i wdrażanie zaawansowanych botów skrojonych pod Twoje potrzeby. Od systemów ticketów, przez zaawansowaną ekonomię, aż po integracje z zewnętrznymi API. Szybkie, stabilne i bezpieczne rozwiązania oparte na JavaScript (Node.js).</p>
+                </div>
+
+                <!-- Karta 2: Grafika -->
+                <div class="service-card">
+                    <h3>Identyfikacja Wizualna</h3>
+                    <p>Kreowanie unikalnego wizerunku w sieci. Specjalizuję się w nowoczesnych projektach wektorowych – od drapieżnych, neonowych logo i banerów, po spersonalizowane emotki oraz oprawę graficzną na serwery Discord i social media.</p>
+                </div>
+            </div>
+
+            <!-- Przycisk do Portfolio z efektem SOON -->
+            <div class="portfolio-box">
+                <h4>Chcesz zobaczyć dotychczasowe realizacje?</h4>
+                <div class="btn-soon">Portfolio: SOON</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEKCJA 3: KONTAKT -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Nawiąż Kontakt</h2>
+            <p style="color: #888888; margin-bottom: 40px;">Masz pytania lub chcesz omówić projekt? Napisz do mnie bezpośrednio.</p>
+            
+            <div class="contact-links">
+                <a href="https://discord.gg/ne0nstore" target="_blank" class="contact-btn">Discord (Neon Store)</a>
+                <a href="https://t.me/flajpik" target="_blank" class="contact-btn">Telegram</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
         }
         
         p { 
