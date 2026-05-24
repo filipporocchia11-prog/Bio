@@ -6,20 +6,58 @@
     <title>flajp | Portfolio & Services</title>
     <style>
         /* --- RESET & GLOBAL STYLES --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; background-color: #050505; color: #ffffff; font-family: 'Arial', sans-serif; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        html { 
+            scroll-behavior: smooth; 
+            background-color: #050505; 
+            color: #ffffff; 
+            font-family: 'Arial', sans-serif; 
+        }
 
+        /* Subtelny pasek przewijania */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #050505; }
         ::-webkit-scrollbar-thumb { background: #ffffff; border-radius: 4px; }
 
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
-        @keyframes loadingStripes { from { background-position: 0 0; } to { background-position: 40px 0; } }
+        /* --- ANIMACJE --- */
+        @keyframes fadeInUp { 
+            from { opacity: 0; transform: translateY(40px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        @keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 
+            40% { transform: translateY(-10px); } 
+            60% { transform: translateY(-5px); } 
+        }
+        @keyframes loadingStripes { 
+            from { background-position: 0 0; } 
+            to { background-position: 40px 0; } 
+        }
 
-        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 20px; position: relative; }
-        .container { max-width: 900px; width: 100%; text-align: center; animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        /* --- SEKCJE --- */
+        section { 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 60px 20px; 
+            position: relative; 
+        }
+        
+        .container { 
+            max-width: 900px; 
+            width: 100%; 
+            text-align: center; 
+            animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards; 
+        }
 
+        /* --- HERO --- */
         #hero { justify-content: center; }
         .avatar-large { width: 130px; height: 130px; border-radius: 50%; border: 3px solid #ffffff; margin-bottom: 25px; object-fit: cover; box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2); }
         h1.hero-title { font-size: 3.5rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
@@ -28,19 +66,35 @@
         .scroll-hint { position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #888888; font-size: 0.9rem; letter-spacing: 2px; animation: bounce 2s infinite; }
         .scroll-hint:hover { color: #ffffff; }
 
+        /* --- USŁUGI --- */
         #services { background-color: #090909; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; }
         .section-title { font-size: 2.5rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 50px; position: relative; display: inline-block; }
         .section-title::after { content: ''; position: absolute; bottom: -10px; left: 25%; width: 50%; height: 3px; background-color: #ffffff; }
 
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
-        .service-card { background-color: #0c0c0c; border: 2px solid #222222; padding: 40px 30px; border-radius: 8px; text-align: left; transition: all 0.3s ease; }
+        
+        .service-card { 
+            background-color: #0c0c0c; 
+            border: 2px solid #222222; 
+            padding: 40px 30px; 
+            border-radius: 8px; 
+            text-align: left; 
+            transition: all 0.3s ease; 
+            text-decoration: none;
+            display: block;
+        }
         .service-card:hover { border-color: #ffffff; transform: translateY(-5px); box-shadow: 6px 6px 0px #ffffff; }
         .service-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: #ffffff; }
         .service-card p { color: #aaaaaa; font-size: 0.95rem; line-height: 1.6; }
+        .service-card b { color: #ffffff; display: block; margin-top: 15px; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
 
+        /* --- PORTFOLIO --- */
         .portfolio-box { background: #050505; border: 2px dashed #333333; padding: 40px; border-radius: 12px; margin-top: 20px; }
+        .portfolio-box h4 { font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; }
         .btn-soon { display: inline-block; padding: 14px 35px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #ffffff; background: linear-gradient(45deg, #111 25%, #22 25%, #22 50%, #11 50%, #11 75%, #22 75%, #22 100%); background-size: 40px 40px; border: 2px solid #ffffff; border-radius: 6px; cursor: not-allowed; animation: loadingStripes 2s linear infinite; box-shadow: 4px 4px 0px #ffffff; }
 
+        /* --- KONTAKT --- */
+        #contact { background-color: #050505; }
         .contact-links { display: flex; flex-direction: column; gap: 20px; max-width: 400px; margin: 0 auto; }
         .contact-btn { display: flex; justify-content: center; align-items: center; text-decoration: none; color: #000000; background-color: #ffffff; padding: 18px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; transition: all 0.3s; border: 2px solid transparent; box-shadow: 6px 6px 0px #333333; }
         .contact-btn:hover { background-color: #050505; color: #ffffff; border: 2px solid #ffffff; box-shadow: 6px 6px 0px #ffffff; transform: translate(-2px, -2px); }
@@ -50,19 +104,30 @@
 </head>
 <body>
 
-        <section id="services">
+    <section id="hero">
+        <div class="container">
+            <img src="https://i.postimg.cc/ncpKt4gP/file-00000000da88720a98c78e4a3f1647e8.png" alt="Logo flajp" class="avatar-large">
+            <h1 class="hero-title">flajp</h1>
+            <p class="hero-subtitle">JS Developer & Graphic Designer</p>
+        </div>
+        <a href="#services" class="scroll-hint">DOWIEDZ SIĘ WIĘCEJ <span>↓</span></a>
+    </section>
+
+    <section id="services">
         <div class="container">
             <h2 class="section-title">Oferta</h2>
             
             <div class="services-grid">
-                <a href="#contact" class="service-card" style="text-decoration: none;">
+                <a href="#contact" class="service-card">
                     <h3>Automatyzacja Discord</h3>
-                    <p>Projektowanie zaawansowanych botów (Node.js). Systemy ticketów, moderacja, ekonomia i integracje API. <b>Kliknij, aby zamówić.</b></p>
+                    <p>Projektowanie i wdrażanie zaawansowanych botów skrojonych pod Twoje potrzeby. Od systemów ticketów, przez zaawansowaną ekonomię, aż po integracje z zewnętrznymi API. Szybkie, stabilne i bezpieczne rozwiązania oparte na JavaScript (Node.js).</p>
+                    <b>Kliknij, aby zamówić</b>
                 </a>
 
-                <a href="#contact" class="service-card" style="text-decoration: none;">
+                <a href="#contact" class="service-card">
                     <h3>Grafika</h3>
-                    <p>Nowoczesne projekty wektorowe: neonowe logo, banery oraz emotki na Twój serwer Discord. <b>Kliknij, aby zamówić.</b></p>
+                    <p>Nowoczesne projekty wektorowe: neonowe logo, banery oraz emotki na Twój serwer Discord. Kreowanie spójnego wizerunku w social mediach i na Discordzie od podstaw.</p>
+                    <b>Kliknij, aby zamówić</b>
                 </a>
             </div>
 
@@ -73,6 +138,15 @@
         </div>
     </section>
 
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Kontakt</h2>
+            <div class="contact-links">
+                <a href="https://discord.gg/ne0nstore" target="_blank" class="contact-btn">Discord</a>
+                <a href="https://t.me/flajpik" target="_blank" class="contact-btn">Telegram</a>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
