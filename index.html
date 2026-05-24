@@ -14,6 +14,30 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden; /* Zabezpiecza przed pojawieniem się paska przewijania od śniegu */
+        }
+
+        /* Efekt spadającego śniegu w CSS */
+        .snow-bg {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.4) 1.5px, transparent 1.5px),
+                radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.2) 2px, transparent 2px),
+                radial-gradient(circle at 20% 90%, rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+                radial-gradient(circle at 70% 10%, rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px);
+            background-size: 80px 80px;
+            animation: snowFall 20s linear infinite;
+            z-index: -1; 
+        }
+
+        @keyframes snowFall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50%); }
         }
 
         .profile-card {
@@ -22,7 +46,9 @@
             padding: 40px;
             border-radius: 12px;
             width: 300px;
+            background-color: #050505; /* Tło pod kartą, żeby śnieg znikał z tyłu */
             box-shadow: 8px 8px 0px #ffffff;
+            z-index: 1;
         }
 
         .avatar {
@@ -62,16 +88,22 @@
             font-weight: bold;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
         }
 
         .link-btn:hover {
             background-color: #050505;
             color: #ffffff;
             border: 2px solid #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4); /* Nowy efekt poświaty */
         }
     </style>
 </head>
 <body>
+    
+    <div class="snow-bg"></div>
 
     <div class="profile-card">
         <img src="https://i.postimg.cc/ncpKt4gP/file-00000000da88720a98c78e4a3f1647e8.png" alt="Logo flajp" class="avatar">
@@ -80,10 +112,9 @@
         <p>JS Developer & Graphic Designer</p>
         
         <div class="links">
+            <a href="#" target="_blank" class="link-btn">Portfolio</a>
             <a href="https://t.me/flajpik" target="_blank" class="link-btn">Telegram</a>
-            <a href="https://www.instagram.com/rocchiafilippo?igsh=ZjRmMjhmcmZ2ejN4" target="_blank" class="link-btn">Instagram</a>
             <a href="https://discord.gg/ne0nstore" target="_blank" class="link-btn">Discord</a>
-            <a href="https://www.tiktok.com/@filip6757?_r=1&_t=ZN-96bzxkdcNnS" target="_blank" class="link-btn">TikTok</a>
         </div>
     </div>
 
