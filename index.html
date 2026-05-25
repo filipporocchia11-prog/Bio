@@ -84,7 +84,31 @@
         .progress-bar { width: 0%; height: 100%; background-color: #ffffff; }
         .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Arial Black', sans-serif; font-weight: 900; color: #ffffff; mix-blend-mode: difference; font-size: 1.2rem; letter-spacing: 1px; }
 
-        .scroll-hint { position: absolute; bottom: 40px; display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #ffffff; font-size: 0.8rem; font-weight: bold; letter-spacing: 3px; animation: bounce 2s infinite; }
+        /* MODYFIKACJA: Domyślnie ukryty przycisk przewijania */
+        .scroll-hint { 
+            position: absolute; 
+            bottom: 40px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-decoration: none; 
+            color: #ffffff; 
+            font-size: 0.9rem; /* Delikatnie powiększony */
+            font-weight: bold; 
+            letter-spacing: 3px; 
+            opacity: 0; /* Ukryty na start */
+            visibility: hidden;
+            transform: translateY(20px); /* Efekt lekkiego wyjechania z dołu */
+            transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+        }
+
+        /* Klasa dodawana przez JS po naładowaniu paska */
+        .scroll-hint.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            animation: bounce 2s infinite 0.6s; /* Animacja skakania odpala się po pojawieniu */
+        }
 
         /* --- USŁUGI --- */
         #services { background-color: #090909; border-top: 2px solid #111111; border-bottom: 2px solid #111111; }
@@ -137,7 +161,7 @@
                 </div>
             </div>
         </div>
-        <a href="#services" class="scroll-hint">PRZEJDŹ DO SYSTEMU <span>↓</span></a>
+        <a href="#services" class="scroll-hint" id="scrollHint">PRZEJDŹ DO SYSTEMU <span>↓</span></a>
     </section>
 
     <section id="services">
@@ -179,11 +203,15 @@
             let width = 0;
             const bar = document.getElementById("mainBar");
             const text = document.getElementById("mainTxt");
+            const scrollHint = document.getElementById("scrollHint"); // Łapiemy nasz przycisk
             
             const id = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(id);
                     text.innerHTML = 'SYSTEM ONLINE 100%';
+                    
+                    // MODYFIKACJA: Po osiągnięciu 100% dodajemy klasę aktywującą wygląd
+                    scrollHint.classList.add("visible");
                 } else {
                     width++;
                     bar.style.width = width + '%';
