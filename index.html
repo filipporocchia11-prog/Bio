@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>flajp | System</title>
+    <!-- Font Awesome do ikon społecznościowych -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         /* --- RESET & GLOBAL STYLES --- */
         * { 
@@ -69,6 +72,206 @@
             text-transform: uppercase; 
             margin-bottom: 60px; 
             font-weight: 900;
+        }
+
+        /* --- HERO --- */
+        #hero { justify-content: center; background: radial-gradient(circle at center, #111111 0%, #050505 100%); }
+        .avatar-large { width: 140px; height: 140px; border-radius: 50%; border: 4px solid #ffffff; margin-bottom: 30px; object-fit: cover; box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.1); }
+        h1.hero-title { font-family: 'Arial Black', sans-serif; font-size: 5rem; font-weight: 900; letter-spacing: -3px; text-transform: uppercase; margin-bottom: 5px; line-height: 0.9; transition: 0.2s; }
+        h1.hero-title:hover { animation: glitch 0.3s infinite; }
+        .hero-subtitle { font-size: 1.3rem; color: #888888; margin-bottom: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+
+        /* --- SEKCJA PROCENTOWA (MAIN SYSTEM PROGRESS) --- */
+        .system-load-box { max-width: 600px; margin: 0 auto; text-align: left; }
+        .progress-container { width: 100%; background-color: #111111; height: 40px; border: 3px solid #ffffff; position: relative; margin-top: 20px; }
+        .progress-bar { width: 0%; height: 100%; background-color: #ffffff; }
+        .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Arial Black', sans-serif; font-weight: 900; color: #ffffff; mix-blend-mode: difference; font-size: 1.2rem; letter-spacing: 1px; }
+
+        .scroll-hint { 
+            display: inline-flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-decoration: none; 
+            color: #ffffff; 
+            font-size: 0.9rem; 
+            font-weight: bold; 
+            letter-spacing: 3px; 
+            margin-top: 50px; 
+            opacity: 0; 
+            visibility: hidden;
+            transform: translateY(15px); 
+            transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+        }
+
+        .scroll-hint.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            animation: bounce 2s infinite 0.5s; 
+        }
+
+        /* --- USŁUGI --- */
+        #services { background-color: #090909; border-top: 2px solid #111111; border-bottom: 2px solid #111111; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        
+        .service-card { 
+            background-color: #050505; 
+            border: 3px solid #222222; 
+            padding: 50px 40px; 
+            border-radius: 0px; 
+            text-align: left; 
+            transition: all 0.2s ease; 
+            text-decoration: none;
+            display: block;
+        }
+        .service-card:hover { border-color: #ffffff; transform: translate(-4px, -4px); box-shadow: 8px 8px 0px #ffffff; }
+        .service-card h3 { font-family: 'Arial Black', sans-serif; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 20px; color: #ffffff; font-weight: 900; }
+        .service-card p { color: #aaaaaa; font-size: 1rem; line-height: 1.6; }
+        .service-card b { color: #ffffff; display: block; margin-top: 25px; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-family: 'Arial Black', sans-serif; }
+
+        /* --- PORTFOLIO SOON --- */
+        .portfolio-soon-box { background: #050505; border: 3px dashed #333333; padding: 40px; text-align: center; font-family: 'Arial Black', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem; color: #444444; transition: 0.3s; }
+        .portfolio-soon-box:hover { color: #ffffff; border-color: #ffffff; }
+
+        /* --- KONTAKT --- */
+        #contact { background-color: #050505; }
+        .contact-links { display: flex; flex-direction: column; gap: 20px; max-width: 500px; margin: 0 auto; }
+        
+        .contact-btn { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 15px; /* Odstęp między ikoną a tekstem */
+            text-decoration: none; 
+            color: #000000; 
+            background-color: #ffffff; 
+            padding: 22px; 
+            font-family: 'Arial Black', sans-serif; 
+            font-weight: 900; 
+            font-size: 1.3rem; 
+            text-transform: uppercase; 
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
+            border: 3px solid transparent; 
+            box-shadow: 8px 8px 0px #222222; 
+        }
+
+        .contact-btn i {
+            font-size: 1.6rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* AKCJA HOVER: Opcja z neonowym gradientem (aktualnie włączona) */
+        .contact-btn:hover { 
+            background: linear-gradient(45deg, #ff0055, #00ffaa);
+            color: #ffffff; 
+            border: 3px solid #ffffff; 
+            box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.2);
+            transform: scale(1.03) translateY(-2px); 
+        }
+
+        /* ALTERNATYWA: Jeśli wolisz ŚNIEŻNOBIAŁY BŁYSK, usuń powyższy hover i odkomentuj ten poniżej: */
+        /*
+        .contact-btn:hover { 
+            background-color: #ffffff;
+            color: #000000; 
+            border: 3px solid #ffffff; 
+            box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.6);
+            transform: translateY(-4px);
+        }
+        */
+
+        .contact-btn:hover i {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        @media (max-width: 768px) { 
+            h1.hero-title { font-size: 3.5rem; letter-spacing: -1px; } 
+            .section-title { font-size: 2.2rem; }
+            .services-grid { grid-template-columns: 1fr; } 
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <div class="container">
+            <img src="https://i.postimg.cc/ncpKt4gP/file-00000000da88720a98c78e4a3f1647e8.png" alt="Logo flajp" class="avatar-large">
+            <h1 class="hero-title">flajp</h1>
+            <p class="hero-subtitle">CODE & STYLE</p>
+            
+            <div class="system-load-box">
+                <div class="progress-container">
+                    <div class="progress-bar" id="mainBar"></div>
+                    <div class="progress-text" id="mainTxt">SYSTEM STATUS: 0%</div>
+                </div>
+            </div>
+
+            <a href="#services" class="scroll-hint" id="scrollHint">PRZEJDŹ DO SYSTEMU <span>↓</span></a>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Usługi</h2>
+            
+            <div class="services-grid">
+                <a href="#contact" class="service-card">
+                    <h3>01 // Boty Discord</h3>
+                    <p>Zaawansowana automatyzacja procesów. Systemy ticketów, bezpieczna moderacja, spersonalizowana ekonomia oraz wiele więcej.</p>
+                    <b>Uruchom projekt →</b>
+                </a>
+
+                <a href="#contact" class="service-card">
+                    <h3>02 // Grafika</h3>
+                    <p>Identyfikacja wizualna z charakterem. Ostre, neonowe wektory, logotypy, potężne banery na social media oraz unikalne paczki emotek skrojone pod społeczności Discord.</p>
+                    <b>Stwórz styl →</b>
+                </a>
+            </div>
+
+            <div class="portfolio-soon-box">
+                PORTFOLIO // SOON...
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">STWÓRZMY COŚ RAZEM</h2>
+            <div class="contact-links">
+                <!-- Dodane ikonki fa-brands -->
+                <a href="https://discord.gg/ne0nstore" target="_blank" class="contact-btn">
+                    <i class="fa-brands fa-discord"></i> Discord
+                </a>
+                <a href="https://t.me/flajpik" target="_blank" class="contact-btn">
+                    <i class="fa-brands fa-telegram"></i> Telegram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            let width = 0;
+            const bar = document.getElementById("mainBar");
+            const text = document.getElementById("mainTxt");
+            const scrollHint = document.getElementById("scrollHint");
+            
+            const id = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(id);
+                    text.innerHTML = 'SYSTEM ONLINE 100%';
+                    scrollHint.classList.add("visible");
+                } else {
+                    width++;
+                    bar.style.width = width + '%';
+                    text.innerHTML = 'ŁADOWANIE SYSTEMU: ' + width + '%';
+                }
+            }, 15);
+        });
+    </script>
+
+</body>
+</html>
         }
 
         /* --- HERO --- */
